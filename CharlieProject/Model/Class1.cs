@@ -8,5 +8,6 @@
 		//Så prøver vi endnu en funktion go go go!
 		//note from mathex1983
 		//2nd note
+		//3rd note
 	}
 }
