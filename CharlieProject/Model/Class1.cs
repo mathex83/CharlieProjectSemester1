@@ -10,6 +10,5 @@
 		//2nd note
 		//3rd note
 		//4th
-		//Morgenstund har guld i mund
 	}
 }
