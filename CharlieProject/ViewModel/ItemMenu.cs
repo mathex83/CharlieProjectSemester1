@@ -10,7 +10,7 @@ namespace CharlieProject.ViewModel
 {
     public class ItemMenu
     {
-
+        //Defines elements in menus. /JBR
         public ItemMenu(string header, List<SubItem> subItems, PackIconKind icon)
         {
             Header = header;

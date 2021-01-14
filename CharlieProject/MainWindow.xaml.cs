@@ -42,6 +42,7 @@ namespace CharlieProject
         {
             InitializeComponent();
 
+            //The following part is the creation of the various menus on the left hand side of the project. /JBR
             var menuNews = new List<SubItem>();
             menuNews.Add(new SubItem("Detail"));
             menuNews.Add(new SubItem("Serviceerhverv"));
@@ -51,8 +52,8 @@ namespace CharlieProject
             var item6 = new ItemMenu("Branchenyt", menuNews, PackIconKind.InfoCircle);
 
             var menuSchedule = new List<SubItem>();
-            menuSchedule.Add(new SubItem("Services"));
-            menuSchedule.Add(new SubItem("Meetings"));
+            menuSchedule.Add(new SubItem("Priv. Virksomhed"));
+            menuSchedule.Add(new SubItem("Off. Virksomheder"));
             var item1 = new ItemMenu("Retningslinjer", menuSchedule, PackIconKind.FaceMaskOutline);
 
             var menuReports = new List<SubItem>();
@@ -64,14 +65,14 @@ namespace CharlieProject
             menuReports.Add(new SubItem("Døde seneste døgn"));
             var item2 = new ItemMenu("Nyeste Coronatal", menuReports, PackIconKind.VirusOutline);
 
-            var menuExpenses = new List<SubItem>();
-            menuSchedule.Add(new SubItem("Fixed"));
-            menuSchedule.Add(new SubItem("Variable"));
-            var item3 = new ItemMenu("Expenses", menuExpenses, PackIconKind.ShoppingBasket);
+            //var menuExpenses = new List<SubItem>();
+            //menuSchedule.Add(new SubItem("Fixed"));
+            //menuSchedule.Add(new SubItem("Variable"));
+            //var item3 = new ItemMenu("Expenses", menuExpenses, PackIconKind.ShoppingBasket);
 
-            var menuFinancial = new List<SubItem>();
-            menuSchedule.Add(new SubItem("Cash flow"));
-            var item4 = new ItemMenu("Financial", menuFinancial, PackIconKind.ScaleBalance);
+            //var menuFinancial = new List<SubItem>();
+            //menuSchedule.Add(new SubItem("Cash flow"));
+            //var item4 = new ItemMenu("Financial", menuFinancial, PackIconKind.ScaleBalance);
 
             var item0 = new ItemMenu("Dashboard", new UserControl(), PackIconKind.ViewDashboard);
 
@@ -79,8 +80,8 @@ namespace CharlieProject
             Menu.Children.Add(new UserControlMenuItem(item6));
             Menu.Children.Add(new UserControlMenuItem(item1));
             Menu.Children.Add(new UserControlMenuItem(item2));
-            Menu.Children.Add(new UserControlMenuItem(item3));
-            Menu.Children.Add(new UserControlMenuItem(item4));
+            //Menu.Children.Add(new UserControlMenuItem(item3));
+            //Menu.Children.Add(new UserControlMenuItem(item4));
 
             //client = new WebClient();
 
