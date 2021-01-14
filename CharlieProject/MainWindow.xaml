@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CharlieProject"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="800" Width="1200" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="800" Width="1400" WindowStartupLocation="CenterScreen" WindowState="Maximized">
 
     <Grid Background="LightGray">
         <Grid.RowDefinitions>
@@ -18,7 +18,7 @@ Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="800" Widt
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid x:Name="Window1" Grid.Column="1" Margin="10,100,10,0" Grid.Row="1">
+        <Grid x:Name="Window1" Grid.Column="1" Margin="10,75,10,0" Grid.Row="1">
             <StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button x:Name="Button1" Margin="0,0,0,0" Width="120" Background="DarkGray"></Button>
@@ -26,7 +26,18 @@ Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="800" Widt
                     <Button x:Name="Button3" Margin="40,0,80,0" Width="120" Background="DarkGray"></Button>
                     <Button x:Name="Button4" Margin="0,0,0,0" Width="120" Background="DarkGray"></Button>
                 </StackPanel>
-                <TextBox Height="595" Width="910"/>
+                
+                <TextBox Height="575">
+                    
+                </TextBox>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                <Button x:Name="OutsideLink1" Margin="0,0,0,0" Background="Transparent" Click="OutsideLink1_Click">Detail</Button>
+                <Button x:Name="OutsideLink2" Margin="40,0,20,0" Background="Transparent" Click="OutsideLink2_Click">Produktionsvirksomheden</Button>
+                <Button x:Name="OutsideLink3" Margin="40,0,20,0" Background="Transparent" Click="OutsideLink3_Click">Serviceerhverv</Button>
+                <Button x:Name="OutsideLink4" Margin="40,0,20,0" Background="Transparent" Click="OutsideLink4_Click">Restauranter, cafeer og overnatningssteder</Button>
+                <Button x:Name="OutsideLink5" Margin="0,0,0,0" Background="Transparent" Click="OutsideLink5_Click">Kontorarbejdspladser</Button>
             </StackPanel>
         </Grid>
 
