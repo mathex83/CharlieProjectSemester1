@@ -34,10 +34,6 @@ namespace CharlieProject
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-        //WebClient client;
-        //string fileSource = @"C:\Temp\Corona.zip";
-        //string fileExtract = @"C:\Temp";
-
         public MainWindow()
         {
             InitializeComponent();
@@ -65,16 +61,7 @@ namespace CharlieProject
             menuReports.Add(new SubItem("Døde seneste døgn"));
             var item2 = new ItemMenu("Nyeste Coronatal", menuReports, PackIconKind.VirusOutline);
 
-            //var menuExpenses = new List<SubItem>();
-            //menuSchedule.Add(new SubItem("Fixed"));
-            //menuSchedule.Add(new SubItem("Variable"));
-            //var item3 = new ItemMenu("Expenses", menuExpenses, PackIconKind.ShoppingBasket);
-
-            //var menuFinancial = new List<SubItem>();
-            //menuSchedule.Add(new SubItem("Cash flow"));
-            //var item4 = new ItemMenu("Financial", menuFinancial, PackIconKind.ScaleBalance);
-
-            var item0 = new ItemMenu("Dashboard", new UserControl(), PackIconKind.ViewDashboard);
+            var item0 = new ItemMenu("Hjem", new UserControl(), PackIconKind.HomeOutline);
 
             Menu.Children.Add(new UserControlMenuItem(item0));
             Menu.Children.Add(new UserControlMenuItem(item6));
@@ -83,8 +70,60 @@ namespace CharlieProject
             //Menu.Children.Add(new UserControlMenuItem(item3));
             //Menu.Children.Add(new UserControlMenuItem(item4));
 
+
+            //WebClient client;
+            //string fileSource = @"C:\Temp\Corona.zip";
+            //string fileExtract = @"C:\Temp";
             //client = new WebClient();
 
+        }
+
+        //The following 5 event handlers are the button clicks that opens the respective web pages,
+        //which apparently have been changed in the way eventhandlers link to webpages in .net 5.0
+        //and c# core. /Janus
+        private void OutsideLink1_Click(object sender, RoutedEventArgs e)
+        {
+            var uri = "https://virksomhedsguiden.dk/erhvervsfremme/content/temaer/coronavirus_og_din_virksomhed/ydelser/krav-og-anbefalinger-til-detailhandlen/59cef21f-a199-42a8-bea0-fdc01ed6cf5f/";
+            var psi = new System.Diagnostics.ProcessStartInfo();
+            psi.UseShellExecute = true;
+            psi.FileName = uri;
+            Process.Start(psi);
+        }
+
+        private void OutsideLink2_Click(object sender, RoutedEventArgs e)
+        {
+            var uri = "https://virksomhedsguiden.dk/erhvervsfremme/content/temaer/coronavirus_og_din_virksomhed/ydelser/krav-og-anbefalinger-til-produktionsvirksomheder/de3e13b6-038d-46c9-8488-fd5d7518b0b6/ ";
+            var psi = new System.Diagnostics.ProcessStartInfo();
+            psi.UseShellExecute = true;
+            psi.FileName = uri;
+            Process.Start(psi);
+        }
+
+        private void OutsideLink3_Click(object sender, RoutedEventArgs e)
+        {
+            var uri = "https://virksomhedsguiden.dk/erhvervsfremme/content/temaer/coronavirus_og_din_virksomhed/ydelser/krav-og-anbefalinger-til-serviceerhverv/e8172f4a-3366-4392-a166-f917dd50a65e/";
+            var psi = new System.Diagnostics.ProcessStartInfo();
+            psi.UseShellExecute = true;
+            psi.FileName = uri;
+            Process.Start(psi);
+        }
+
+        private void OutsideLink4_Click(object sender, RoutedEventArgs e)
+        {
+            var uri = "https://virksomhedsguiden.dk/erhvervsfremme/content/temaer/coronavirus_og_din_virksomhed/ydelser/krav-og-anbefalinger-til-restauranter-cafeer-og-overnatningssteder/bc5c379d-8ee0-4f1a-890e-317c3e20a45e/";
+            var psi = new System.Diagnostics.ProcessStartInfo();
+            psi.UseShellExecute = true;
+            psi.FileName = uri;
+            Process.Start(psi);
+        }
+
+        private void OutsideLink5_Click(object sender, RoutedEventArgs e)
+        {
+            var uri = "https://virksomhedsguiden.dk/erhvervsfremme/content/temaer/coronavirus_og_din_virksomhed/ydelser/krav-og-anbefalinger-til-kontorarbejdspladser/940fd004-bf50-4529-8533-fc2f49217d4c/";
+            var psi = new System.Diagnostics.ProcessStartInfo();
+            psi.UseShellExecute = true;
+            psi.FileName = uri;
+            Process.Start(psi);
         }
 
         /*private void BottomBar_Loaded(object sender, RoutedEventArgs e)
@@ -95,56 +134,11 @@ namespace CharlieProject
         private void WindowsFormsHost_ChildChanged(object sender, System.Windows.Forms.Integration.ChildChangedEventArgs e)
         {
 
-        }*/
+        }
 
 
-        //The following 5 event handlers are the button clicks that opens the respective web pages,
-        //which apparently have been changed in the way eventhandlers link to webpages in .net 5.0
-        //and c# core. /Janus
-        /* private void Button1_Click(object sender, RoutedEventArgs e)
-         {
-             var uri = "https://virksomhedsguiden.dk/erhvervsfremme/content/temaer/coronavirus_og_din_virksomhed/ydelser/krav-og-anbefalinger-til-detailhandlen/59cef21f-a199-42a8-bea0-fdc01ed6cf5f/";
-             var psi = new System.Diagnostics.ProcessStartInfo();
-             psi.UseShellExecute = true;
-             psi.FileName = uri;
-             Process.Start(psi);
-         }
 
-         private void Button2_Click(object sender, RoutedEventArgs e)
-         {
-             var uri = "https://virksomhedsguiden.dk/erhvervsfremme/content/temaer/coronavirus_og_din_virksomhed/ydelser/krav-og-anbefalinger-til-serviceerhverv/e8172f4a-3366-4392-a166-f917dd50a65e/";
-             var psi = new System.Diagnostics.ProcessStartInfo();
-             psi.UseShellExecute = true;
-             psi.FileName = uri;
-             Process.Start(psi);
-         }
-
-         private void Button3_Click(object sender, RoutedEventArgs e)
-         {
-             var uri = "https://virksomhedsguiden.dk/erhvervsfremme/content/temaer/coronavirus_og_din_virksomhed/ydelser/krav-og-anbefalinger-til-restauranter-cafeer-og-overnatningssteder/bc5c379d-8ee0-4f1a-890e-317c3e20a45e/";
-             var psi = new System.Diagnostics.ProcessStartInfo();
-             psi.UseShellExecute = true;
-             psi.FileName = uri;
-             Process.Start(psi);
-         }
-
-         private void Button4_Click(object sender, RoutedEventArgs e)
-         {
-             var uri = "https://virksomhedsguiden.dk/erhvervsfremme/content/temaer/coronavirus_og_din_virksomhed/ydelser/krav-og-anbefalinger-til-kontorarbejdspladser/940fd004-bf50-4529-8533-fc2f49217d4c/";
-             var psi = new System.Diagnostics.ProcessStartInfo();
-             psi.UseShellExecute = true;
-             psi.FileName = uri;
-             Process.Start(psi);
-         }
-
-         private void Button5_Click(object sender, RoutedEventArgs e)
-         {
-             var uri = "https://virksomhedsguiden.dk/erhvervsfremme/content/temaer/coronavirus_og_din_virksomhed/ydelser/krav-og-anbefalinger-til-virksomheder-med-vandrende-arbejdskraft/ff9c2363-fd26-4feb-a390-53e48534994b/";
-             var psi = new System.Diagnostics.ProcessStartInfo();
-             psi.UseShellExecute = true;
-             psi.FileName = uri;
-             Process.Start(psi);
-         }
+       
 
          private void btnDownload_Click(object sender, RoutedEventArgs e)
          {
@@ -175,14 +169,13 @@ namespace CharlieProject
              ExtractFile();
          }
 
-
          private void ExtractFile()
          {
              ZipFile.ExtractToDirectory(fileSource, fileExtract);
 
-         }*/
+         }
 
-        /*private void btnOpenFile_Click(object sender, RoutedEventArgs e)
+        private void btnOpenFile_Click(object sender, RoutedEventArgs e)
         {
             TryTry municipality = new TryTry();
             municipality.FindFile();
