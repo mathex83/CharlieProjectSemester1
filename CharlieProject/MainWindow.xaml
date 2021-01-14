@@ -6,17 +6,29 @@
         xmlns:local="clr-namespace:CharlieProject"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="800" Width="1200" WindowStartupLocation="CenterScreen" WindowState="Maximized">
 
     <Grid Background="LightGray">
         <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+
+        <Grid x:Name="Window1" Grid.Column="1" Margin="10,100,10,0" Grid.Row="1">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="Button1" Margin="0,0,0,0" Width="120" Background="DarkGray"></Button>
+                    <Button x:Name="Button2" Margin="80,0,40,0" Width="120" Background="DarkGray"></Button>
+                    <Button x:Name="Button3" Margin="40,0,80,0" Width="120" Background="DarkGray"></Button>
+                    <Button x:Name="Button4" Margin="0,0,0,0" Width="120" Background="DarkGray"></Button>
+                </StackPanel>
+                <TextBox Height="595" Width="910"/>
+            </StackPanel>
+        </Grid>
 
         <materialDesign:ColorZone Mode="PrimaryMid" Grid.ColumnSpan="2" HorizontalAlignment="Stretch">
             <Grid>
@@ -34,6 +46,6 @@ Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="450" Widt
             <ScrollViewer HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
                 <StackPanel x:Name="Menu" Margin="10"/>
             </ScrollViewer>
-        </Grid>        
+        </Grid>
     </Grid>
 </Window>
