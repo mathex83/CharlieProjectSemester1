@@ -10,35 +10,34 @@ Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="800" Widt
 
     <Grid Background="LightGray">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
         <Grid x:Name="Window1" Grid.Column="1" Margin="10,75,10,0" Grid.Row="1">
-            <StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button x:Name="Button1" Margin="0,0,0,0" Width="120" Background="DarkGray"></Button>
-                    <Button x:Name="Button2" Margin="80,0,40,0" Width="120" Background="DarkGray"></Button>
-                    <Button x:Name="Button3" Margin="40,0,80,0" Width="120" Background="DarkGray"></Button>
-                    <Button x:Name="Button4" Margin="0,0,0,0" Width="120" Background="DarkGray"></Button>
+            <StackPanel Margin="0,0,0,652">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="997">
+                    <Button  x:Name="Download" Content="Download" Width="120" Click="Download_Click"/>
+                    <Button x:Name="Ballrup" Margin="50,0,0,0" Content="Ballrup" Width="120" Background="DarkGray" Click="Ballrup_Click"/>
+                    <Button x:Name="tarnby" Margin="50,0,40,0" Content="Tårnby" Width="120" Background="DarkGray" Click="tarnby_Click"/>
+                    <Button x:Name="Albertslund" Content="Albertslund" Margin="50,0,40,0" Width="156" Background="DarkGray" Click="Albertslund_Click" RenderTransformOrigin="0.256,0.532"/>
+                    <Button x:Name="INFEKTION" Content="INFEKTION" Width="156" Background="DarkGray" Click="INFEKTION_Click" RenderTransformOrigin="0.256,0.532"/>
+
+
                 </StackPanel>
-                
-                <TextBox Height="575">
-                    
-                </TextBox>
 
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,591,0,0">
                 <Button x:Name="OutsideLink1" Margin="0,0,0,0" Background="Transparent" Click="OutsideLink1_Click">Detail</Button>
                 <Button x:Name="OutsideLink2" Margin="40,0,20,0" Background="Transparent" Click="OutsideLink2_Click">Produktionsvirksomheden</Button>
                 <Button x:Name="OutsideLink3" Margin="40,0,20,0" Background="Transparent" Click="OutsideLink3_Click">Serviceerhverv</Button>
                 <Button x:Name="OutsideLink4" Margin="40,0,20,0" Background="Transparent" Click="OutsideLink4_Click">Restauranter, cafeer og overnatningssteder</Button>
                 <Button x:Name="OutsideLink5" Margin="0,0,0,0" Background="Transparent" Click="OutsideLink5_Click">Kontorarbejdspladser</Button>
             </StackPanel>
+            <TextBox  x:Name="info" HorizontalAlignment="Left" Margin="175,88,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="715" Height="239"/>
         </Grid>
 
         <materialDesign:ColorZone Mode="PrimaryMid" Grid.ColumnSpan="2" HorizontalAlignment="Stretch">
