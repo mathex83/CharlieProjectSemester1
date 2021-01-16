@@ -28,8 +28,8 @@ Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="800" Widt
         <Button x:Name="CodedBy"  Grid.Column="1" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="22" Height="22" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#d43900" HorizontalAlignment="Right"  VerticalAlignment="Center"  Margin="0,4,45,4" Click="CodedBy_Click">
             <materialDesign:PackIcon Kind="informationvariant" HorizontalAlignment="Center" VerticalAlignment="Center" Height="22" Width="22" RenderTransformOrigin="27.958,1.543"/>
         </Button>
-        
-        
+
+
         <!--Sidebar-->
 
         <StackPanel Grid.Row="1" VerticalAlignment="Top" Height="162" Background="#fff">
@@ -38,17 +38,17 @@ Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="800" Widt
         <StackPanel  Grid.Row="2" Background="#d43900">
 
             <Menu Background="{x:Null}" Grid.RowSpan="1">
-                <MenuItem Header="_Home" Icon="{materialDesign:PackIcon Kind=home}" HorizontalAlignment="Center" Width="249" FontSize="18" Foreground="White" Click="Homepage_Click"  />
+                <MenuItem Header="_Home" Icon="{materialDesign:PackIcon Kind=home}" HorizontalAlignment="Center" Width="300" FontSize="18" Foreground="White" Click="Homepage_Click"  />
             </Menu>
             <Menu Background="{x:Null}" Grid.RowSpan="1">
-                <MenuItem Header="_Download" Icon="{materialDesign:PackIcon Kind=download}" HorizontalAlignment="Center" Width="249" FontSize="18" Foreground="White" Click="CallDownload_Click"  />
+                <MenuItem Header="_Download" Icon="{materialDesign:PackIcon Kind=download}" HorizontalAlignment="Center" Width="300" FontSize="18" Foreground="White" Click="CallDownload_Click"  />
             </Menu>
             <Menu Background="{x:Null}" Grid.RowSpan="1">
-                <MenuItem Header="_info" Icon="{materialDesign:PackIcon Kind=informationoutline}" HorizontalAlignment="Center" Width="249" FontSize="18" Foreground="White" Click="info_Click"  />
+                <MenuItem Header="_info" Icon="{materialDesign:PackIcon Kind=informationoutline}" HorizontalAlignment="Center" Width="300" FontSize="18" Foreground="White" Click="info_Click"  />
             </Menu>
 
             <Menu  IsMainMenu="True" Background="{x:Null}" Grid.Row="1" Width="auto">
-                <MenuItem Header="_Kommuner" HorizontalAlignment="Center"  Icon="{materialDesign:PackIcon Kind=mapmarker}" Foreground="White"  VerticalAlignment="Center"  FontSize="18" Width="249" >
+                <MenuItem Header="_Kommuner" HorizontalAlignment="Center"  Icon="{materialDesign:PackIcon Kind=mapmarker}" Foreground="White"  VerticalAlignment="Center"  FontSize="18" Width="300" >
                     <MenuItem  Header="Ballerup" HorizontalAlignment="Center" Margin="40,0,0,0" Click="Ballerup_Click"/>
                     <MenuItem  HorizontalAlignment="Right" Header="Tårnby" Click="tarnby_click" />
                     <MenuItem HorizontalAlignment="Right" Header="Albertslund"/>
