@@ -340,4 +340,4 @@ ASALocalRun/
 healthchecksdb
 
 # Sql connection file
-appsettings.json
+App.config
