@@ -38,7 +38,7 @@ Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="800" Widt
         <StackPanel  Grid.Row="2" Background="#d43900">
 
             <Menu Background="{x:Null}" Grid.RowSpan="1">
-                <MenuItem Header="_Home" Icon="{materialDesign:PackIcon Kind=home}" HorizontalAlignment="Center" Width="249" FontSize="18" Foreground="White" Click="CallDownload_Click"  />
+                <MenuItem Header="_Home" Icon="{materialDesign:PackIcon Kind=home}" HorizontalAlignment="Center" Width="249" FontSize="18" Foreground="White" Click="Homepage_Click"  />
             </Menu>
             <Menu Background="{x:Null}" Grid.RowSpan="1">
                 <MenuItem Header="_Download" Icon="{materialDesign:PackIcon Kind=download}" HorizontalAlignment="Center" Width="249" FontSize="18" Foreground="White" Click="CallDownload_Click"  />
