@@ -286,5 +286,7 @@ namespace CharlieProject
             SqlQueries mt = new SqlQueries();
             mt.InsertSomeData();
         }
-	}
+
+        
+    }
 }

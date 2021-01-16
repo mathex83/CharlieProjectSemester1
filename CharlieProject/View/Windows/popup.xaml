@@ -8,7 +8,15 @@
 		WindowStartupLocation="CenterScreen"
 		Height="200" Width="400" Background="#d43900">
     <Grid>
-		<TextBlock x:Name="errorWin" Background="#000000ff" Foreground="White" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Height="150" Width="350"/>
-		<Button Content="OK" Height="30" Width="70" Foreground="Black" Background="Gray" VerticalAlignment="Bottom" Click="Close_Click"/>
-	</Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="errorWin"  Foreground="White" TextAlignment="Center" Background="#000000FF" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0"/>
+        <Button Content="OK" Height="30" Width="70" Foreground="#d43900" Background="#fff" VerticalAlignment="Bottom"  Grid.Row="1" Click="Close_Click" BorderBrush="{x:Null}"/>
+    </Grid>
 </Window>
