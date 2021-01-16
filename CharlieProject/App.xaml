@@ -12,6 +12,22 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.LightBlue.xaml" />
             </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+			<Style x:Key="FieldHeader" TargetType="Label">
+				<Setter Property="FontSize" Value="20"/>
+				<Setter Property="FontWeight" Value="Normal"/>
+				<Setter Property="Foreground" Value="#004da8"/>
+				<Setter Property="HorizontalAlignment" Value="Center"/>
+				<Setter Property="FontFamily" Value="Roboto"/>
+			</Style>
+			<Style x:Key="FieldEle" TargetType="TextBlock">
+				<Setter Property="FontSize" Value="26"/>
+				<Setter Property="FontWeight" Value="Bold"/>
+				<Setter Property="Foreground" Value="#004da8"/>
+				<Setter Property="HorizontalAlignment" Value="Center"/>
+				<Setter Property="FontFamily" Value="Roboto"/>
+				<Setter Property="TextWrapping" Value="Wrap"/>
+			</Style>
+		</ResourceDictionary>
+		
     </Application.Resources>
 </Application>

@@ -1,14 +1,14 @@
-﻿<Window x:Class="CharlieProject.View.Windows.Window1"
+﻿<Window x:Class="CharlieProject.View.Windows.popup"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CharlieProject.View.Windows"
         mc:Ignorable="d"
-        Title="Window1" 
 		WindowStartupLocation="CenterScreen"
-		Style="{StaticResource windowsbase}">
+		Height="200" Width="400" Background="#d43900">
     <Grid>
-        
-    </Grid>
+		<TextBlock x:Name="errorWin" Background="#000000ff" Foreground="White" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Height="150" Width="350"/>
+		<Button Content="OK" Height="30" Width="70" Foreground="Black" Background="Gray" VerticalAlignment="Bottom" Click="Close_Click"/>
+	</Grid>
 </Window>

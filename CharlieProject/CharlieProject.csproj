@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <None Remove="Covid19 subsite logo.jpg" />
-    <None Remove="iconsEtc\coronavirus.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,7 +23,6 @@
 
   <ItemGroup>
     <Resource Include="Covid19 subsite logo.jpg" />
-    <Resource Include="iconsEtc\coronavirus.png" />
   </ItemGroup>
 
 </Project>

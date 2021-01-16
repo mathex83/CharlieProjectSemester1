@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CharlieProject"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="800" Width="1400" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="900" Width="1600" WindowStartupLocation="CenterScreen">
 
     <Grid Background="#fff ">
         <Grid.ColumnDefinitions>
@@ -43,15 +43,17 @@ Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="800" Widt
             <Menu Background="{x:Null}" Grid.RowSpan="1">
                 <MenuItem Header="_Download" Icon="{materialDesign:PackIcon Kind=download}" HorizontalAlignment="Center" Width="300" FontSize="18" Foreground="White" Click="CallDownload_Click"  />
             </Menu>
-            <Menu Background="{x:Null}" Grid.RowSpan="1">
+			<Menu Background="{x:Null}" Grid.RowSpan="1">
+				<MenuItem Header="_Tilføj data" Icon="{materialDesign:PackIcon Kind=DatabaseAdd}" HorizontalAlignment="Center" Width="300" FontSize="18" Foreground="White" Click="AddDataDB_Click"/>
+			</Menu>
+			<Menu Background="{x:Null}" Grid.RowSpan="1">
                 <MenuItem Header="_info" Icon="{materialDesign:PackIcon Kind=informationoutline}" HorizontalAlignment="Center" Width="300" FontSize="18" Foreground="White" Click="info_Click"  />
             </Menu>
-
             <Menu  IsMainMenu="True" Background="{x:Null}" Grid.Row="1" Width="auto">
                 <MenuItem Header="_Kommuner" HorizontalAlignment="Center"  Icon="{materialDesign:PackIcon Kind=mapmarker}" Foreground="White"  VerticalAlignment="Center"  FontSize="18" Width="300" >
-                    <MenuItem  Header="Ballerup" HorizontalAlignment="Center" Margin="40,0,0,0" Click="Ballerup_Click"/>
-                    <MenuItem  HorizontalAlignment="Right" Header="Tårnby" Click="tarnby_click" />
-                    <MenuItem HorizontalAlignment="Right" Header="Albertslund"/>
+					<MenuItem x:Name="a" Header="Tårnby" HorizontalAlignment="Center" Margin="40,0,0,0" Click="Municipality_Click"/>
+					<MenuItem x:Name="b" HorizontalAlignment="Right" Header="Albertslund" Click="Municipality_Click" />
+					<MenuItem x:Name="c" HorizontalAlignment="Right" Header="Ballerup" Click="Municipality_Click"/>
                 </MenuItem>
             </Menu>
 
@@ -60,7 +62,7 @@ Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="800" Widt
         <Grid x:Name="kommuneName" Grid.Column="1" Grid.Row="1" Background="#d43900">
 
             <StackPanel Grid.Column="1"  Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock x:Name="KommuneName"  Text="Albertslund  Kommune" FontSize="36" FontFamily="Arial" Foreground="White" FontWeight="Normal" Height="50"/>
+                <TextBlock x:Name="KommuneName"  Text="Albertslund  Kommune" FontSize="36" FontFamily="Roboto" Foreground="White" FontWeight="Normal" Height="50"/>
 
             </StackPanel>
         </Grid>
@@ -116,7 +118,7 @@ Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="800" Widt
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
-
+				<RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -130,8 +132,8 @@ Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="800" Widt
             </Rectangle>
 
             <StackPanel HorizontalAlignment="Center" Margin="0,27,0,28" Orientation="Vertical" Grid.Row="0"   VerticalAlignment="Center">
-                <Label Content="Dagens antal testede:"  Foreground="#004da8"  HorizontalAlignment="Center"/>
-                <TextBlock x:Name="tested" Foreground="#004da8" FontSize="26" FontWeight="bold" FontFamily="roboto" Text="DbNmber" TextWrapping="Wrap"/>
+				<Label Content="Dagens antal testede:" Style="{StaticResource FieldHeader}"/>
+				<TextBlock x:Name="tested" Text="DbNumber" Style="{StaticResource FieldEle}"/>
             </StackPanel>
             <!--Info row2 col 1-->
             <Rectangle Margin="72,10,64,10" Fill="White" RadiusY="10" RadiusX="10" Grid.Row="1" >
@@ -139,58 +141,52 @@ Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="800" Widt
                     <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" RenderingBias="Quality" ShadowDepth="1"/>
                 </Rectangle.Effect>
             </Rectangle>
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Grid.Row="1">
-                <Label Content="Dagens smittede i %:" HorizontalAlignment="Center"  Foreground="#004da8"/>
-                <TextBlock x:Name="Procent" Foreground="#004da8" FontSize="26" FontWeight="bold" FontFamily="roboto" Text="DbNmber" TextWrapping="Wrap" />
+			<Rectangle Margin="72,10,64,10" Fill="White" RadiusY="10" RadiusX="10" Grid.Row="2" >
+				<Rectangle.Effect>
+					<DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" RenderingBias="Quality" ShadowDepth="1"/>
+				</Rectangle.Effect>
+			</Rectangle>
+			<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Grid.Row="2">
+				<Label Content="Dagens smittede i %:" Style="{StaticResource FieldHeader}"/>
+				<TextBlock x:Name="Procent" Text="DbNmber" Style="{StaticResource FieldEle}"/>
             </StackPanel>
-            <!--Info row3 col 1-->
-            <Rectangle Margin="71,10,64,10" Fill="White" RadiusY="10" RadiusX="10" Grid.Row="2" >
-                <Rectangle.Effect>
-                    <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" RenderingBias="Quality" ShadowDepth="1"/>
-                </Rectangle.Effect>
-            </Rectangle>
-            <StackPanel HorizontalAlignment="Center" Orientation="Vertical" Grid.Row="2"  VerticalAlignment="Center">
-                <Label Content="Dagens antal smittede:"  Foreground="#004da8" HorizontalAlignment="Center"/>
-                <TextBlock x:Name="LockCompanies2" Foreground="#004da8" FontSize="26" FontWeight="bold" FontFamily="roboto" Text="DbNmber" TextWrapping="Wrap"/>
-            </StackPanel>
+            
             <!--Info row1 col 2-->
-            <Rectangle Margin="71,10,64,10" Fill="White" RadiusY="10" RadiusX="10" Grid.Row="0"  Grid.Column="2" >
-                <Rectangle.Effect>
-                    <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" RenderingBias="Quality" ShadowDepth="1"/>
-                </Rectangle.Effect>
-            </Rectangle>
-            <StackPanel HorizontalAlignment="Center"  Orientation="Vertical" Grid.Row="0"  Grid.Column="1" VerticalAlignment="Center">
-                <Label Content="Dagens antal smittede:"  Foreground="#004da8" />
-                <TextBlock x:Name="infected" Foreground="#004da8" FontSize="26" FontWeight="bold" FontFamily="roboto" Text="DbNmber" TextWrapping="Wrap"/>
+			<StackPanel HorizontalAlignment="Center"  Orientation="Vertical" Grid.Row="1"  Grid.Column="0" VerticalAlignment="Center">
+				<Label Content="Dagens antal smittede:" Style="{StaticResource FieldHeader}" />
+				<TextBlock x:Name="infected" Text="DbNmber" Style="{StaticResource FieldEle}"/>
             </StackPanel>
             <!--Info row2 col 2-->
-            <Rectangle Margin="71,10,64,10" Fill="White" RadiusY="10" RadiusX="10" Grid.Row="1"  Grid.Column="1" >
+            <Rectangle Margin="71,10,64,10" Fill="White" RadiusY="10" RadiusX="10" Grid.Row="3"  Grid.Column="0" >
                 <Rectangle.Effect>
                     <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" RenderingBias="Quality" ShadowDepth="1"/>
                 </Rectangle.Effect>
             </Rectangle>
-            <StackPanel HorizontalAlignment="Center" Orientation="Vertical" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
-                <Label Content="Dagens antal smittede:"  Foreground="#004da8"/>
-                <TextBlock x:Name="LockCompanies" Foreground="#004da8" FontSize="26" FontWeight="bold" FontFamily="roboto" Text="DbNmber" TextWrapping="Wrap" />
+            <StackPanel HorizontalAlignment="Center" Orientation="Vertical" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center">
+				<Label Content="Din kommunes smittegruppe:"  Style="{StaticResource FieldHeader}"/>
+				<TextBlock x:Name="InfectedLevel" Text="DbNmber" Style="{StaticResource FieldEle}"/>
             </StackPanel>
             <!--Info row3 col 2-->
-            <Rectangle Margin="71,10,64,10" Fill="White" RadiusY="10" RadiusX="10" Grid.Row="2"  Grid.Column="1" >
+            <Rectangle Margin="71,10,64,10" Fill="White" RadiusY="10" RadiusX="10" Grid.Row="0"  Grid.Column="1" Grid.RowSpan="4">
                 <Rectangle.Effect>
                     <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" RenderingBias="Quality" ShadowDepth="1"/>
                 </Rectangle.Effect>
-            </Rectangle>
-            <StackPanel HorizontalAlignment="Center" Margin="0,42,0,42" Orientation="Vertical" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
-                <Label Content="Dagens antal smittede:"  Foreground="#004da8" />
-                <TextBlock x:Name="LockCompanies222" Foreground="#004da8" FontSize="26" FontWeight="bold" FontFamily="roboto" Text="DbNmber" TextWrapping="Wrap" />
-            </StackPanel>
+				
+			</Rectangle>
+
+			<ScrollViewer HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Grid.RowSpan="4" Margin="0,42,0,22" Width="500">
+				<StackPanel Orientation="Vertical" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Grid.RowSpan="4" >
+				    <Label Content="Disse brancher skal være lukket:" Style="{StaticResource FieldHeader}" />				
+					<TextBlock x:Name="LockCompanies" Text="DbNmber" FontSize="14" FontWeight="Normal" Style="{StaticResource FieldEle}"/>
+				</StackPanel>	
+			</ScrollViewer>
+			
+			
 
 
 
 
 
-
-
-        </Grid>
-
+		</Grid>
     </Grid>
 </Window>
