@@ -34,6 +34,9 @@ namespace CharlieProject
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+        WebClient client;
+        string fileSource = @"C:\Temp\Corona.zip";
+        string fileExtract = @"C:\Temp";
         public MainWindow()
         {
             InitializeComponent();
@@ -71,10 +74,8 @@ namespace CharlieProject
             //Menu.Children.Add(new UserControlMenuItem(item4));
 
 
-            //WebClient client;
-            //string fileSource = @"C:\Temp\Corona.zip";
-            //string fileExtract = @"C:\Temp";
-            //client = new WebClient();
+            
+            client = new WebClient();
 
         }
 
@@ -90,6 +91,7 @@ namespace CharlieProject
             Process.Start(psi);
         }
 
+        
         private void OutsideLink2_Click(object sender, RoutedEventArgs e)
         {
             var uri = "https://virksomhedsguiden.dk/erhvervsfremme/content/temaer/coronavirus_og_din_virksomhed/ydelser/krav-og-anbefalinger-til-produktionsvirksomheder/de3e13b6-038d-46c9-8488-fd5d7518b0b6/ ";
@@ -124,6 +126,64 @@ namespace CharlieProject
             psi.UseShellExecute = true;
             psi.FileName = uri;
             Process.Start(psi);
+        }
+
+        private void Ballrup_Click(object sender, RoutedEventArgs e)
+        {
+            info.Clear();
+            info.Text = "Ballrup";
+        }
+
+        private void tarnby_Click(object sender, RoutedEventArgs e)
+        {
+            info.Clear();
+            info.Text = "sdfsdf";
+        }
+
+        private void Albertslund_Click(object sender, RoutedEventArgs e)
+        {
+            info.Clear();
+            info.Text = "HELLLLLLO";
+        }
+
+        private void INFEKTION_Click(object sender, RoutedEventArgs e)
+        {
+            info.Clear();
+            info.Text = "sdfsdfsdfsdfsdfsdf";
+        }
+
+        private void Download_Click(object sender, RoutedEventArgs e)
+        {
+            var hw = new HtmlWeb();
+            HtmlDocument doc = hw.Load("https://covid19.ssi.dk/overvagningsdata/download-fil-med-overvaagningdata");
+            string url = doc.DocumentNode.SelectSingleNode("//blockquote[@class='factbox']//p//a").Attributes["href"].Value.ToString();
+
+            DirectoryInfo dir = new DirectoryInfo(@"C:\Temp");
+
+            foreach (FileInfo fi in dir.GetFiles())
+            {
+                fi.Delete();
+            }
+
+            if (!string.IsNullOrEmpty(url))
+            {
+                Uri uri = new Uri(url);
+                client.DownloadFileAsync(uri, @"C:\Temp" + @"\Corona.zip");
+
+            }
+            if (Directory.Exists(fileExtract) == true)
+            {
+                Directory.CreateDirectory(fileExtract);
+            }
+
+            Thread.Sleep(500);
+
+            ExtractFile();
+        }
+        private void ExtractFile()
+        {
+            ZipFile.ExtractToDirectory(fileSource, fileExtract);
+
         }
 
         /*private void BottomBar_Loaded(object sender, RoutedEventArgs e)
