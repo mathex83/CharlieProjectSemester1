@@ -36,14 +36,18 @@ namespace CharlieProject
     /// </summary>
     public partial class MainWindow : Window
     {
-        WebClient client;
+#region variables for pulling csv files from web. Coded by Rezan.
+		WebClient client;
         string fileSource = @"C:\Temp\Corona.zip";
         string fileExtract = @"C:\Temp";
-        public int testedRowArrayLength;
-        public string[] blabla = new string[100];
-        public string[][] dataFromMuniCsvFile;
+		#endregion
 
-        public MainWindow()
+#region variable to load data from csv-files. Function is not working though Coded by Martin.
+		public string[][] dataFromMunicipalityCsvFile;
+		#endregion
+
+#region elements called for csv-download to work from MainWindow initialize. Coded by Rezan.
+		public MainWindow()
         {
             InitializeComponent();
             info.Visibility = Visibility.Hidden;
@@ -55,6 +59,10 @@ namespace CharlieProject
             KommuneName.Text = "";
 
         }
+#endregion
+
+#region Method started to pull data from csv in to app and send to database. Coded by Martin, but will wait for a "perfect" version.
+
         private void Show_Click(object sender, RoutedEventArgs e)
         {
             //Browse File function
@@ -70,7 +78,6 @@ namespace CharlieProject
             {
 				SqlQueries mt = new SqlQueries();
 
-
 				//Save full file  path  inside a string
 				string CSVFilePath = System.IO.Path.GetFullPath(openFileDialog.FileName);
                 //If file  name  is  Municipality_tested_persons_time_series do  ....
@@ -78,48 +85,47 @@ namespace CharlieProject
                 {
                     //Read all lines in csv file
                     string[] testedRowArray = File.ReadAllLines(CSVFilePath);
-                    dataFromMuniCsvFile = new string[testedRowArray.Length][];
-                    
+                    dataFromMunicipalityCsvFile = new string[testedRowArray.Length][];                    
 
-                    //Loop
+                    //Loop the data.
                     for (int i = 1; i < testedRowArray.Length; i++)
                     {
                         for (int j = 1; j < testedRowArray[1].Length; j++)
                         {
-                            dataFromMuniCsvFile[i] = testedRowArray[i].Split(';');
+                            dataFromMunicipalityCsvFile[i] = testedRowArray[i].Split(';');
                         }
                     }
 
-                    MessageBox.Show("Række 0:\n" + mt.dataFromCoronaDB[0][1].ToString() + "\n" +
-                        mt.dataFromCoronaDB[0][2].ToString() + "\n" +
-                        mt.dataFromCoronaDB[0][3].ToString() + "\n" +
-                        Convert.ToDateTime(mt.dataFromCoronaDB[0][4]).ToString("yyyy-MM-dd") + "\n\nRække 1:\n" +
-                        mt.dataFromCoronaDB[1][1].ToString() + "\n" +
-                        mt.dataFromCoronaDB[1][2].ToString() + "\n" +
-                        mt.dataFromCoronaDB[1][3].ToString() + "\n" +
-                        Convert.ToDateTime(mt.dataFromCoronaDB[1][4]).ToString("yyyy-MM-dd") + "\n\nRække 2:\n" +
-                        mt.dataFromCoronaDB[2][1].ToString() + "\n" +
-                        mt.dataFromCoronaDB[2][2].ToString() + "\n" +
-                        mt.dataFromCoronaDB[2][3].ToString() + "\n" +
-                        Convert.ToDateTime(mt.dataFromCoronaDB[2][4]).ToString("yyyy-MM-dd") + "\n\nRække 3:\n" +
-                        mt.dataFromCoronaDB[3][1].ToString() + "\n" +
-                        mt.dataFromCoronaDB[3][2].ToString() + "\n" +
-                        mt.dataFromCoronaDB[3][3].ToString() + "\n" +
-                        Convert.ToDateTime(mt.dataFromCoronaDB[3][4]).ToString("yyyy-MM-dd"));
+                    MessageBox.Show("Række 0:\n" + mt.infectedDataIncoming[0][1].ToString() + "\n" +
+                        mt.infectedDataIncoming[0][2].ToString() + "\n" +
+                        mt.infectedDataIncoming[0][3].ToString() + "\n" +
+                        Convert.ToDateTime(mt.infectedDataIncoming[0][4]).ToString("yyyy-MM-dd") + "\n\nRække 1:\n" +
+                        mt.infectedDataIncoming[1][1].ToString() + "\n" +
+                        mt.infectedDataIncoming[1][2].ToString() + "\n" +
+                        mt.infectedDataIncoming[1][3].ToString() + "\n" +
+                        Convert.ToDateTime(mt.infectedDataIncoming[1][4]).ToString("yyyy-MM-dd") + "\n\nRække 2:\n" +
+                        mt.infectedDataIncoming[2][1].ToString() + "\n" +
+                        mt.infectedDataIncoming[2][2].ToString() + "\n" +
+                        mt.infectedDataIncoming[2][3].ToString() + "\n" +
+                        Convert.ToDateTime(mt.infectedDataIncoming[2][4]).ToString("yyyy-MM-dd") + "\n\nRække 3:\n" +
+                        mt.infectedDataIncoming[3][1].ToString() + "\n" +
+                        mt.infectedDataIncoming[3][2].ToString() + "\n" +
+                        mt.infectedDataIncoming[3][3].ToString() + "\n" +
+                        Convert.ToDateTime(mt.infectedDataIncoming[3][4]).ToString("yyyy-MM-dd"));
 
-                    if (Convert.ToDateTime(mt.dataFromCoronaDB[3][4]).ToString("yyyy-MM-dd") ==
-                            Convert.ToDateTime(dataFromMuniCsvFile[1][0]).ToString("yyyy-MM-dd")
-                        && mt.dataFromCoronaDB[3][3].ToString() == "5")
+                    if (Convert.ToDateTime(mt.infectedDataIncoming[3][4]).ToString("yyyy-MM-dd") ==
+                            Convert.ToDateTime(dataFromMunicipalityCsvFile[1][0]).ToString("yyyy-MM-dd")
+                        && mt.infectedDataIncoming[3][3].ToString() == "5")
                     {
 
-                        if (mt.dataFromCoronaDB[3][1] == dataFromMuniCsvFile[1][5])
+                        if (mt.infectedDataIncoming[3][1] == dataFromMunicipalityCsvFile[1][5])
                         {
 
                         }
                     }
                     else
                     {
-                        MessageBox.Show("false\n" + mt.dataFromCoronaDB[1][4] + "\n" + dataFromMuniCsvFile[1][0]);
+                        MessageBox.Show("false\n" + mt.infectedDataIncoming[1][4] + "\n" + dataFromMunicipalityCsvFile[1][0]);
                     }
 
                 }
@@ -136,7 +142,9 @@ namespace CharlieProject
                 }
             }
         }
+        #endregion
 
+#region Download and extract csv-files. Coded by Rezan
         private void CallDownload_Click(object sender, RoutedEventArgs e)
         {
             KommuneName.Text = "";
@@ -171,9 +179,11 @@ namespace CharlieProject
         {
             ZipFile.ExtractToDirectory(fileSource, fileExtract);
         }
+		#endregion
 
-        //Created by Martin Nørholm
-        private void Municipality_Click(object sender, RoutedEventArgs e)
+#region Clickevent to pass data from database to fields on MainWindow. Coded by Martin.
+		//Created by Martin Nørholm
+		private void Municipality_Click(object sender, RoutedEventArgs e)
         {
             Home.Visibility = Visibility.Hidden;
             info.Visibility = Visibility.Visible;
@@ -205,29 +215,35 @@ namespace CharlieProject
 
             LockCompanies.Text = dataforuse[5];
         }
+		#endregion
 
-        private void Exit_Click(object sender, RoutedEventArgs e)
+#region Exit the app. Coded by Martin and Rezan.
+		private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            Environment.Exit(0);
+            Application.Current.Shutdown();
         }
+		#endregion
 
-
-        private void info_Click(object sender, RoutedEventArgs e)
+#region Open view to select buttons to open sites for the industry groups. Coded by Rezan.
+		private void info_Click(object sender, RoutedEventArgs e)
         {
             KommuneName.Text = "";
             Home.Visibility = Visibility.Hidden;
             info.Visibility = Visibility.Hidden;
             website.Visibility = Visibility.Visible;
         }
+#endregion
 
+#region A little about window. Coded by Rezan.
         private void CodedBy_Click(object sender, RoutedEventArgs e)
         {
             popup win = new popup();
-            win.errorWin.Text = "Coded by Team Charlie";
-            win.Show();
-            
+            win.popupWindow.Text = "Coded by Team Charlie:\nDitte Slyngborg\nJanus B. Reedtz\nMartin Nørholm\nRezan Razoul";
+            win.Show();            
         }
+#endregion
 
+#region buttonclick-events to open browser on our industry groups. Coded by Janus (JBD) and links adapted by Rezan and Martin.
         private void Detail_Click(object sender, RoutedEventArgs e)
         {
             var uri = "https://virksomhedsguiden.dk/erhvervsfremme/content/temaer/coronavirus_og_din_virksomhed/ydelser/krav-og-anbefalinger-til-detailhandlen/59cef21f-a199-42a8-bea0-fdc01ed6cf5f/";
@@ -272,21 +288,25 @@ namespace CharlieProject
             psi.FileName = uri;
             Process.Start(psi);
         }
+		#endregion
 
-        private void Homepage_Click(object sender, RoutedEventArgs e)
+#region Click to show home page view. Coded by Rezan.
+		private void Homepage_Click(object sender, RoutedEventArgs e)
         {
             KommuneName.Text = "";
             Home.Visibility = Visibility.Visible;
             info.Visibility = Visibility.Hidden;
             website.Visibility = Visibility.Hidden;
         }
+#endregion
 
-		private void AddDataDB_Click(object sender, RoutedEventArgs e)
+#region buttonclickevent to add some data to database for new infected people. Coded by Martin.
+        private void AddDataDB_Click(object sender, RoutedEventArgs e)
 		{
             SqlQueries mt = new SqlQueries();
             mt.InsertSomeData();
         }
+#endregion
 
-        
     }
 }

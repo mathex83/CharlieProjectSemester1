@@ -1,5 +1,8 @@
-﻿using CharlieProject.View.Windows;
+﻿#region Coded by Martin
+
+using CharlieProject.View.Windows;
 using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows;
@@ -8,25 +11,27 @@ namespace CharlieProject.Model
 {
 	class SqlQueries
 	{
-        //StringConnenction to  Server
-        SqlConnection connString = new SqlConnection(@"Server = .; Database=Charlie-CoronaDB;Trusted_Connection=True;MultipleActiveResultSets=true;");
+        //Connectionstring to database is fetched from App.config which is ignored by GitHub
+        SqlConnection connString = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConCharlie"].ConnectionString);
 
-        public string[][] dataFromCoronaDB;
-        public string[][] dataFromInfectedLevels;
+        public string[][] infectedDataIncoming;
+        public string[][] infectedLevelsIncoming;
         public int i;
         
         public string infectedPercent = "";
         public float tested;
         public float infected;
 
-        //A method get all data from  Database
+        /// <summary>
+        ///This method pulls data from the database for infectedDataIncoming dependent on Municipality selected in MainWindow.
+        /// </summary>
         public string[] SelectAMunicipality(int muniID)
         {  
             try
             {
                 SqlCommand infectedShow = new SqlCommand(@"SELECT TOP(7) ID,numberTested, numberInfected,municipalityID, date
-                    FROM Infected WHERE municipalityID = @municipalityID ORDER BY date DESC", connString);
-                infectedShow.Parameters.Add("@municipalityID", SqlDbType.Int).Value = muniID;
+                    FROM Infected WHERE municipalityID = @municipalityID ORDER BY date DESC", connString); //Query sent to database.
+                infectedShow.Parameters.Add("@municipalityID", SqlDbType.Int).Value = muniID; //the Municipality to search for.
                 connString.Open();
                 SqlDataReader rd = infectedShow.ExecuteReader();
 
@@ -34,15 +39,17 @@ namespace CharlieProject.Model
                 DataTable dt = new DataTable();
                 dt.Load(rd);
                 // ...to use for defining length of this array:
-                dataFromCoronaDB = new string[dt.Rows.Count][];
+                infectedDataIncoming = new string[dt.Rows.Count][];
 
+                //calls the Executereader again since data disappears from c# after dt.load.
                 rd = infectedShow.ExecuteReader();
 
-                //using an int to refer to current column.
+                //using an int to refer to current column...
                 i = 0;
+                //...and build the array with the values.
                 foreach (var str in rd)
                 {
-                    dataFromCoronaDB[i] = new string[]{rd.GetValue(1).ToString(),
+                    infectedDataIncoming[i] = new string[]{rd.GetValue(1).ToString(),
                     rd.GetValue(2).ToString(),
                     rd.GetValue(3).ToString(),Convert.ToDateTime(rd.GetValue(4)).ToString("yyyy-MM-dd")};
                     i++;
@@ -51,8 +58,8 @@ namespace CharlieProject.Model
 
                 //Need to pick data from the newest date.
                 //SELECT-statement is build to have newest date in top row (index0), which is "easy" for us to pick out here:
-                tested = float.Parse(dataFromCoronaDB[0][0]);
-                infected = float.Parse(dataFromCoronaDB[0][1]);
+                tested = float.Parse(infectedDataIncoming[0][0]);
+                infected = float.Parse(infectedDataIncoming[0][1]);
                 infectedPercent = string.Format("{0:0.00}", (infected / tested * 100));
             }
             catch (Exception ex)
@@ -64,8 +71,6 @@ namespace CharlieProject.Model
                 if (connString != null && connString.State == ConnectionState.Open) connString.Close();
             }
 
-
-
             string[] currentInfectionLevel = ShowInfectionLevelsWithBusinesses(float.Parse(infectedPercent));
 
             string[] output = new string[] { tested.ToString(), infected.ToString(), infectedPercent,
@@ -74,6 +79,7 @@ namespace CharlieProject.Model
             return output;
         }
 
+        //Method to pick the other database-data we need.
         public string[] ShowInfectionLevelsWithBusinesses(float currentInfectionPercent)
         {
             string[] output = new string[3];
@@ -98,18 +104,18 @@ namespace CharlieProject.Model
                 dt.Load(rdInfectedLevels);
 
                 // ...to use for defining length of this array:
-                dataFromInfectedLevels = new string[dt.Rows.Count][];
+                infectedLevelsIncoming = new string[dt.Rows.Count][];
                 rdInfectedLevels = infectedLevels.ExecuteReader();
                 i = 0;
                 foreach (var str in rdInfectedLevels)
                 {
-                    dataFromInfectedLevels[i] = new string[]{
+                    infectedLevelsIncoming[i] = new string[]{
                     rdInfectedLevels.GetValue(0).ToString(),
                     rdInfectedLevels.GetValue(1).ToString(),
                     };
                     i++;
                 };
-
+                //Can't call the reader with a new query before it's closed.
                 rdInfectedLevels.Close();
                 connString.Close();
 
@@ -130,17 +136,17 @@ namespace CharlieProject.Model
 
                 string closeBusinesses = "";
 
-                for (int y = 0; y < dataFromInfectedLevels.Length; y++)
+                for (int y = 0; y < infectedLevelsIncoming.Length; y++)
                 {
-                    for (int x = 0; x < dataFromInfectedLevels[y].Length; x++)
+                    for (int x = 0; x < infectedLevelsIncoming[y].Length; x++)
                     {
                         if (x == 0)
                         {
-                            closeBusinesses += dataFromInfectedLevels[y][x] + ":\n";
+                            closeBusinesses += infectedLevelsIncoming[y][x] + ":\n";
                         }
                         else
                         {
-                            closeBusinesses += dataFromInfectedLevels[y][x] + "\n\n";
+                            closeBusinesses += infectedLevelsIncoming[y][x] + "\n\n";
                         }
                     }
                 }
@@ -150,7 +156,7 @@ namespace CharlieProject.Model
             catch (Exception ex)
             {
                 popup win = new popup();
-                win.errorWin.Text = "Kunne ikke hente data. Dette er fejlmeddelelsen:\n" + ex.Message;
+                win.popupWindow.Text = "Kunne ikke hente data. Dette er fejlmeddelelsen:\n" + ex.Message;
             }
             finally
             {
@@ -160,7 +166,7 @@ namespace CharlieProject.Model
             return output;
         }
 
-
+        //Data to insert to Infected but in a "perfect" version of the app it would be inserted from the csv-files.
         public void InsertSomeData()
         {
             popup win = new popup();
@@ -184,13 +190,13 @@ namespace CharlieProject.Model
                 , connString);
                 connString.Open();
                 inserts.ExecuteNonQuery();
-                win.errorWin.Text = "DATA ER SENDT!";
-                win.errorWin.FontSize = 40;
+                win.popupWindow.Text = "DATA ER SENDT!";
+                win.popupWindow.FontSize = 40;
                 win.Show();
             }
             catch (Exception ex)
             {                
-                win.errorWin.Text = "Kunne ikke hente data. Dette er fejlmeddelelsen:\n" + ex.Message;
+                win.popupWindow.Text = "Kunne ikke hente data. Dette er fejlmeddelelsen:\n" + ex.Message;
                 win.Show();
             }
             finally
@@ -199,4 +205,5 @@ namespace CharlieProject.Model
             }
         }
     }
+	#endregion
 }
