@@ -106,10 +106,10 @@ Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="900" Widt
 
             </Grid.RowDefinitions>
             <Button  x:Name="Detail"   Background="#d43900"  Content="Detail Handel" Margin="19,29,17,29" Click="Detail_Click" />
-            <Button   Grid.Column="1" Name="production"   Background="#d43900" Content="Produktionsvirksomheder" Margin="10,29,20,29" />
-            <Button Grid.Column="2" Name="service"  Background="#d43900" Content="Serviceerhverv" Margin="10,29,16,29" />
-            <Button   Grid.Column="3"  Name="restaurants" Background="#d43900" Content="Restauranter, cafeer og overnatningssteder" Margin="10,29" />
-            <Button  Grid.Column="4"  Name="office"   Background="#d43900" Content="Kontorarbejdspladser" Margin="10,29,17,29" />
+            <Button   Grid.Column="1" Name="production"   Background="#d43900" Content="Produktionsvirksomheder" Margin="10,29,20,29" Click="production_Click" />
+            <Button Grid.Column="2" Name="service"  Background="#d43900" Content="Serviceerhverv" Margin="10,29,16,29" Click="service_Click" />
+            <Button   Grid.Column="3"  Name="restaurants" Background="#d43900" Content="Restauranter, cafeer og overnatningssteder"  Click="restaurants_Click" Margin="10,29" />
+            <Button  Grid.Column="4"  Name="office"   Background="#d43900" Content="Kontorarbejdspladser" Margin="10,29,17,29" Click="office_Click" />
 
         </Grid>
 
