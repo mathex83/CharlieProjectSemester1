@@ -19,11 +19,14 @@ namespace CharlieProject.View.Windows
 	/// </summary>
 	public partial class popup : Window
 	{
+		//Startup method for window
 		public popup()
 		{
 			InitializeComponent();
 		}
 
+		//Coded by Martin.
+		//A little click-event to close window and return to MainWindow.
 		private void Close_Click(object sender, RoutedEventArgs e)
 		{
 			this.Close();
