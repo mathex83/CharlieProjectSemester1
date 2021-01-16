@@ -56,26 +56,29 @@ namespace CharlieProject
         {
 
 
+
             var hw = new HtmlWeb();
             HtmlDocument doc = hw.Load("https://covid19.ssi.dk/overvagningsdata/download-fil-med-overvaagningdata");
             string url = doc.DocumentNode.SelectSingleNode("//blockquote[@class='factbox']//p//a").Attributes["href"].Value.ToString();
 
+            DirectoryInfo dir = new DirectoryInfo(@"C:\Temp");
+
+            foreach (FileInfo fi in dir.GetFiles())
+            {
+                fi.Delete();
+            }
 
             if (!string.IsNullOrEmpty(url))
             {
                 Uri uri = new Uri(url);
-                client.DownloadFileAsync(uri, @"C:\Temp" + @"\Corona.zip");
+                client.DownloadFileAsync(uri, @"C:\Temp\Corona.zip");
 
             }
-
-
-
-
-            string location = @"C:\Temp";
-            if (Directory.Exists(location) == false)
+            if (Directory.Exists(fileExtract) == true)
             {
-                Directory.CreateDirectory(location);
+                Directory.CreateDirectory(fileExtract);
             }
+
             Thread.Sleep(500);
 
             ExtractFile();
@@ -175,6 +178,13 @@ namespace CharlieProject
             psi.UseShellExecute = true;
             psi.FileName = uri;
             Process.Start(psi);
+        }
+
+        private void Homepage_Click(object sender, RoutedEventArgs e)
+        {
+            Home.Visibility = Visibility.Visible;
+            info.Visibility = Visibility.Hidden;
+            website.Visibility = Visibility.Hidden;
         }
 
 
