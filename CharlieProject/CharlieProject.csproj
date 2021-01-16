@@ -5,9 +5,11 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>coronavirus-5107715_1920.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Covid19 subsite logo.jpg" />
     <None Remove="iconsEtc\coronavirus.png" />
   </ItemGroup>
 
@@ -21,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Covid19 subsite logo.jpg" />
     <Resource Include="iconsEtc\coronavirus.png" />
   </ItemGroup>
 
