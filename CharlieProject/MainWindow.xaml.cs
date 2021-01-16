@@ -26,6 +26,8 @@ using HtmlAgilityPack;
 using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 using CharlieProject.ViewModel;
 using MaterialDesignThemes.Wpf;
+using CharlieProject.Model;
+using CharlieProject.View.Windows;
 
 namespace CharlieProject
 {
@@ -37,13 +39,15 @@ namespace CharlieProject
         WebClient client;
         string fileSource = @"C:\Temp\Corona.zip";
         string fileExtract = @"C:\Temp";
-
+        public int testedRowArrayLength;
+        public string[] blabla = new string[100];
+        public string[][] dataFromMuniCsvFile;
 
         public MainWindow()
         {
-
             InitializeComponent();
             info.Visibility = Visibility.Hidden;
+            KommuneName.Text = "";
             Home.Visibility = Visibility.Visible;
 
             client = new WebClient();
@@ -51,12 +55,91 @@ namespace CharlieProject
             KommuneName.Text = "";
 
         }
+        private void Show_Click(object sender, RoutedEventArgs e)
+        {
+            //Browse File function
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = fileExtract;
+            //Filter files that will  be shown in files windows
+            openFileDialog.Filter = "CSV  FILES|Municipality_cases_time_series.csv;Municipality_tested_persons_time_series.csv;";
+            // Show open file dialog box
+            Nullable<bool> FileOk = openFileDialog.ShowDialog();
+            int testedRowArrayLength;
+            // Process open file dialog box results
+            if (FileOk == true)
+            {
+				SqlQueries mt = new SqlQueries();
+
+
+				//Save full file  path  inside a string
+				string CSVFilePath = System.IO.Path.GetFullPath(openFileDialog.FileName);
+                //If file  name  is  Municipality_tested_persons_time_series do  ....
+                if (CSVFilePath == openFileDialog.InitialDirectory + @"\Municipality_tested_persons_time_series.csv")
+                {
+                    //Read all lines in csv file
+                    string[] testedRowArray = File.ReadAllLines(CSVFilePath);
+                    dataFromMuniCsvFile = new string[testedRowArray.Length][];
+                    
+
+                    //Loop
+                    for (int i = 1; i < testedRowArray.Length; i++)
+                    {
+                        for (int j = 1; j < testedRowArray[1].Length; j++)
+                        {
+                            dataFromMuniCsvFile[i] = testedRowArray[i].Split(';');
+                        }
+                    }
+
+                    MessageBox.Show("Række 0:\n" + mt.dataFromCoronaDB[0][1].ToString() + "\n" +
+                        mt.dataFromCoronaDB[0][2].ToString() + "\n" +
+                        mt.dataFromCoronaDB[0][3].ToString() + "\n" +
+                        Convert.ToDateTime(mt.dataFromCoronaDB[0][4]).ToString("yyyy-MM-dd") + "\n\nRække 1:\n" +
+                        mt.dataFromCoronaDB[1][1].ToString() + "\n" +
+                        mt.dataFromCoronaDB[1][2].ToString() + "\n" +
+                        mt.dataFromCoronaDB[1][3].ToString() + "\n" +
+                        Convert.ToDateTime(mt.dataFromCoronaDB[1][4]).ToString("yyyy-MM-dd") + "\n\nRække 2:\n" +
+                        mt.dataFromCoronaDB[2][1].ToString() + "\n" +
+                        mt.dataFromCoronaDB[2][2].ToString() + "\n" +
+                        mt.dataFromCoronaDB[2][3].ToString() + "\n" +
+                        Convert.ToDateTime(mt.dataFromCoronaDB[2][4]).ToString("yyyy-MM-dd") + "\n\nRække 3:\n" +
+                        mt.dataFromCoronaDB[3][1].ToString() + "\n" +
+                        mt.dataFromCoronaDB[3][2].ToString() + "\n" +
+                        mt.dataFromCoronaDB[3][3].ToString() + "\n" +
+                        Convert.ToDateTime(mt.dataFromCoronaDB[3][4]).ToString("yyyy-MM-dd"));
+
+                    if (Convert.ToDateTime(mt.dataFromCoronaDB[3][4]).ToString("yyyy-MM-dd") ==
+                            Convert.ToDateTime(dataFromMuniCsvFile[1][0]).ToString("yyyy-MM-dd")
+                        && mt.dataFromCoronaDB[3][3].ToString() == "5")
+                    {
+
+                        if (mt.dataFromCoronaDB[3][1] == dataFromMuniCsvFile[1][5])
+                        {
+
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("false\n" + mt.dataFromCoronaDB[1][4] + "\n" + dataFromMuniCsvFile[1][0]);
+                    }
+
+                }
+                //If file name is Municipality_cases_time_series do  ....
+
+                else if (CSVFilePath == openFileDialog.InitialDirectory + @"\Municipality_cases_time_series.csv")
+                {
+                    string[] infectedRowArray = File.ReadAllLines(CSVFilePath);
+                    for (int i = 1; i < infectedRowArray.Length; i++)
+                    {
+                        //File2.AddRange(infectedRowArray[i].Split(';'));
+                    }
+                    testedRowArrayLength = infectedRowArray[1].Split(';').Length;
+                }
+            }
+        }
 
         private void CallDownload_Click(object sender, RoutedEventArgs e)
         {
-
-
-
+            KommuneName.Text = "";
             var hw = new HtmlWeb();
             HtmlDocument doc = hw.Load("https://covid19.ssi.dk/overvagningsdata/download-fil-med-overvaagningdata");
             string url = doc.DocumentNode.SelectSingleNode("//blockquote[@class='factbox']//p//a").Attributes["href"].Value.ToString();
@@ -89,21 +172,38 @@ namespace CharlieProject
             ZipFile.ExtractToDirectory(fileSource, fileExtract);
         }
 
-        private void Ballerup_Click(object sender, RoutedEventArgs e)
+        //Created by Martin Nørholm
+        private void Municipality_Click(object sender, RoutedEventArgs e)
         {
             Home.Visibility = Visibility.Hidden;
-            website.Visibility = Visibility.Hidden;
-
             info.Visibility = Visibility.Visible;
+            website.Visibility = Visibility.Hidden;
+            MenuItem bt = sender as MenuItem;
+            SqlQueries mt = new SqlQueries();
+            string[] dataforuse = new string[1];
+            //knap funktion
+            switch (bt.Name)
+            {                
+                case "a":
+                    dataforuse = mt.SelectAMunicipality(4);
+                    KommuneName.Text = "Tårnby kommune";
+                    break;
+                case "b":
+                    dataforuse = mt.SelectAMunicipality(5);
+                    KommuneName.Text = "Albertslund kommune";
+                    break;
+                case "c":
+                    dataforuse = mt.SelectAMunicipality(6);
+                    KommuneName.Text = "Ballerup kommune";
+                    break;
+            }
 
-            KommuneName.Text = "Ballerup Kommune";
-            tested.Text = "hello";
-            infected.Text = "World";
-            Procent.Text = "100%";
-            LockCompanies.Text = "Resturanter";
-            LockCompanies.Text = "Resturanter og alle barer";
+            tested.Text = dataforuse[0];
+            infected.Text = dataforuse[1];
+            Procent.Text = dataforuse[2] + "%";
+            InfectedLevel.Text = dataforuse[3] + " - " + dataforuse[4];
 
-
+            LockCompanies.Text = dataforuse[5];
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -111,20 +211,10 @@ namespace CharlieProject
             Environment.Exit(0);
         }
 
-        private void tarnby_click(object sender, RoutedEventArgs e)
-        {
-            Home.Visibility = Visibility.Hidden;
-            KommuneName.Text = "Tårnby Kommune";
-            tested.Text = "blablabla";
-            infected.Text = "blablabladfgdfgdgf";
-            Procent.Text = "324234100%";
-            LockCompanies.Text = "sdfsdfsdfsdf";
-            LockCompanies.Text = "sdfsdfsdfsdf";
-        }
-        
 
         private void info_Click(object sender, RoutedEventArgs e)
         {
+            KommuneName.Text = "";
             Home.Visibility = Visibility.Hidden;
             info.Visibility = Visibility.Hidden;
             website.Visibility = Visibility.Visible;
@@ -132,7 +222,10 @@ namespace CharlieProject
 
         private void CodedBy_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Coded  By  Team Charlie");
+            popup win = new popup();
+            win.errorWin.Text = "Coded by Team Charlie";
+            win.Show();
+            
         }
 
         private void Detail_Click(object sender, RoutedEventArgs e)
@@ -182,102 +275,16 @@ namespace CharlieProject
 
         private void Homepage_Click(object sender, RoutedEventArgs e)
         {
+            KommuneName.Text = "";
             Home.Visibility = Visibility.Visible;
             info.Visibility = Visibility.Hidden;
             website.Visibility = Visibility.Hidden;
         }
 
-
-
-
-
-
-
-
-
-
-        /*private void BottomBar_Loaded(object sender, RoutedEventArgs e)
-{
-
-}
-
-private void WindowsFormsHost_ChildChanged(object sender, System.Windows.Forms.Integration.ChildChangedEventArgs e)
-{
-
-}*/
-
-
-        //The following 5 event handlers are the button clicks that opens the respective web pages,
-        //which apparently have been changed in the way eventhandlers link to webpages in .net 5.0
-        //and c# core. /Janus
-        /* private void Button1_Click(object sender, RoutedEventArgs e)
-         {
-             
-         }
-
-         
-
-         private void Button3_Click(object sender, RoutedEventArgs e)
-         {
-             
-         }
-
-         private void Button4_Click(object sender, RoutedEventArgs e)
-         {
-             
-         }
-
-         private void Button5_Click(object sender, RoutedEventArgs e)
-         {
-             var uri = "https://virksomhedsguiden.dk/erhvervsfremme/content/temaer/coronavirus_og_din_virksomhed/ydelser/krav-og-anbefalinger-til-virksomheder-med-vandrende-arbejdskraft/ff9c2363-fd26-4feb-a390-53e48534994b/";
-             var psi = new System.Diagnostics.ProcessStartInfo();
-             psi.UseShellExecute = true;
-             psi.FileName = uri;
-             Process.Start(psi);
-         }
-
-         private void btnDownload_Click(object sender, RoutedEventArgs e)
-         {
-             var hw = new HtmlWeb();
-             HtmlDocument doc = hw.Load("https://covid19.ssi.dk/overvagningsdata/download-fil-med-overvaagningdata");
-             string url = doc.DocumentNode.SelectSingleNode("//blockquote[@class='factbox']//p//a").Attributes["href"].Value.ToString();
-
-             DirectoryInfo dir = new DirectoryInfo(@"C:\Temp");
-
-             foreach (FileInfo fi in dir.GetFiles())
-             {
-                 fi.Delete();
-             }
-
-             if (!string.IsNullOrEmpty(url))
-             {
-                 Uri uri = new Uri(url);
-                 client.DownloadFileAsync(uri, @"C:\Temp" + @"\Corona.zip");
-
-             }
-             if (Directory.Exists(fileExtract) == true)
-             {
-                 Directory.CreateDirectory(fileExtract);
-             }
-
-             Thread.Sleep(500);
-
-             ExtractFile();
-         }
-
-
-         private void ExtractFile()
-         {
-             ZipFile.ExtractToDirectory(fileSource, fileExtract);
-
-         }*/
-
-        /*private void btnOpenFile_Click(object sender, RoutedEventArgs e)
-        {
-            TryTry municipality = new TryTry();
-            municipality.FindFile();
-
-        }*/
-    }
-
+		private void AddDataDB_Click(object sender, RoutedEventArgs e)
+		{
+            SqlQueries mt = new SqlQueries();
+            mt.InsertSomeData();
+        }
+	}
 }

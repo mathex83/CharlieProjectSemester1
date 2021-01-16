@@ -10,24 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CharlieProject.View.UserControls
+namespace CharlieProject.View.Windows
 {
 	/// <summary>
-	/// Interaction logic for BottomBar.xaml
+	/// Interaction logic for Window1.xaml
 	/// </summary>
-	public partial class BottomBar : UserControl
+	public partial class popup : Window
 	{
-		public BottomBar()
+		public popup()
 		{
 			InitializeComponent();
 		}
 
-		private void ExitClick(object sender, RoutedEventArgs e)
+		private void Close_Click(object sender, RoutedEventArgs e)
 		{
-			Application.Current.Shutdown();
+			this.Close();
 		}
 	}
 }
