@@ -147,17 +147,22 @@ namespace CharlieProject
 #region Download and extract csv-files. Coded by Rezan
         private void CallDownload_Click(object sender, RoutedEventArgs e)
         {
+            if (Directory.Exists(fileExtract) == false)
+            {
+                Directory.CreateDirectory(fileExtract);
+			}
+			else
+			{
+				DirectoryInfo dir = new DirectoryInfo(fileExtract);
+				foreach (FileInfo fi in dir.GetFiles())
+				{
+					fi.Delete();
+				}
+			}
             KommuneName.Text = "";
             var hw = new HtmlWeb();
             HtmlDocument doc = hw.Load("https://covid19.ssi.dk/overvagningsdata/download-fil-med-overvaagningdata");
             string url = doc.DocumentNode.SelectSingleNode("//blockquote[@class='factbox']//p//a").Attributes["href"].Value.ToString();
-
-            DirectoryInfo dir = new DirectoryInfo(@"C:\Temp");
-
-            foreach (FileInfo fi in dir.GetFiles())
-            {
-                fi.Delete();
-            }
 
             if (!string.IsNullOrEmpty(url))
             {
@@ -165,11 +170,7 @@ namespace CharlieProject
                 client.DownloadFileAsync(uri, @"C:\Temp\Corona.zip");
 
             }
-            if (Directory.Exists(fileExtract) == true)
-            {
-                Directory.CreateDirectory(fileExtract);
-            }
-
+            
             Thread.Sleep(500);
 
             ExtractFile();
