@@ -24,7 +24,6 @@ using System.Data.SqlClient;
 using System.Configuration;
 using HtmlAgilityPack;
 using HtmlDocument = HtmlAgilityPack.HtmlDocument;
-using CharlieProject.ViewModel;
 using MaterialDesignThemes.Wpf;
 using CharlieProject.Model;
 using CharlieProject.View.Windows;
@@ -50,13 +49,14 @@ namespace CharlieProject
 		public MainWindow()
         {
             InitializeComponent();
+            website.Visibility = Visibility.Hidden;
             info.Visibility = Visibility.Hidden;
             KommuneName.Text = "";
-            Home.Visibility = Visibility.Visible;
 
+            HomePage homepage = new HomePage();
+            Home.Children.Add(homepage);
+            
             client = new WebClient();
-            website.Visibility = Visibility.Hidden;
-            KommuneName.Text = "";
 
         }
 #endregion
@@ -147,17 +147,22 @@ namespace CharlieProject
 #region Download and extract csv-files. Coded by Rezan
         private void CallDownload_Click(object sender, RoutedEventArgs e)
         {
+            if (Directory.Exists(fileExtract) == false)
+            {
+                Directory.CreateDirectory(fileExtract);
+			}
+			else
+			{
+				DirectoryInfo dir = new DirectoryInfo(fileExtract);
+				foreach (FileInfo fi in dir.GetFiles())
+				{
+					fi.Delete();
+				}
+			}
             KommuneName.Text = "";
             var hw = new HtmlWeb();
             HtmlDocument doc = hw.Load("https://covid19.ssi.dk/overvagningsdata/download-fil-med-overvaagningdata");
             string url = doc.DocumentNode.SelectSingleNode("//blockquote[@class='factbox']//p//a").Attributes["href"].Value.ToString();
-
-            DirectoryInfo dir = new DirectoryInfo(@"C:\Temp");
-
-            foreach (FileInfo fi in dir.GetFiles())
-            {
-                fi.Delete();
-            }
 
             if (!string.IsNullOrEmpty(url))
             {
@@ -165,14 +170,13 @@ namespace CharlieProject
                 client.DownloadFileAsync(uri, @"C:\Temp\Corona.zip");
 
             }
-            if (Directory.Exists(fileExtract) == true)
-            {
-                Directory.CreateDirectory(fileExtract);
-            }
-
+            //hejhej
             Thread.Sleep(500);
 
             ExtractFile();
+            popup p = new popup();
+            p.popupWindow.Text = "Files downloaded!";
+            p.Show();
         }
 
         private void ExtractFile()
@@ -294,9 +298,11 @@ namespace CharlieProject
 		private void Homepage_Click(object sender, RoutedEventArgs e)
         {
             KommuneName.Text = "";
-            Home.Visibility = Visibility.Visible;
             info.Visibility = Visibility.Hidden;
             website.Visibility = Visibility.Hidden;
+            Home.Visibility = Visibility.Visible;
+            HomePage home = new HomePage();
+            Home.Children.Add(home);
         }
 #endregion
 

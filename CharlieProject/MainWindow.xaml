@@ -39,17 +39,9 @@ Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="900" Widt
 
             <Menu Background="{x:Null}" Grid.RowSpan="1">
                 <MenuItem Header="_Home" Icon="{materialDesign:PackIcon Kind=home}" HorizontalAlignment="Center" Width="300" FontSize="18" Foreground="White" Click="Homepage_Click"  />
-            </Menu>
-            <Menu Background="{x:Null}" Grid.RowSpan="1">
                 <MenuItem Header="_Download" Icon="{materialDesign:PackIcon Kind=download}" HorizontalAlignment="Center" Width="300" FontSize="18" Foreground="White" Click="CallDownload_Click"  />
-            </Menu>
-			<Menu Background="{x:Null}" Grid.RowSpan="1">
 				<MenuItem Header="_Tilføj data" Icon="{materialDesign:PackIcon Kind=DatabaseAdd}" HorizontalAlignment="Center" Width="300" FontSize="18" Foreground="White" Click="AddDataDB_Click"/>
-			</Menu>
-			<Menu Background="{x:Null}" Grid.RowSpan="1">
                 <MenuItem Header="_Info" Icon="{materialDesign:PackIcon Kind=informationoutline}" HorizontalAlignment="Center" Width="300" FontSize="18" Foreground="White" Click="info_Click"  />
-            </Menu>
-            <Menu  IsMainMenu="True" Background="{x:Null}" Grid.Row="1" Width="auto">
                 <MenuItem Header="_Kommuner" HorizontalAlignment="Center"  Icon="{materialDesign:PackIcon Kind=mapmarker}" Foreground="White"  VerticalAlignment="Center"  FontSize="18" Width="300" >
 					<MenuItem x:Name="a" Header="Tårnby" HorizontalAlignment="Center" Margin="40,0,0,0" Click="Municipality_Click"/>
 					<MenuItem x:Name="b" HorizontalAlignment="Right" Header="Albertslund" Click="Municipality_Click" />
@@ -66,28 +58,8 @@ Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="900" Widt
 
             </StackPanel>
         </Grid>
-
-        <Grid  x:Name="Home" Grid.Column="1" Grid.Row="2" Background="#fff">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition  Height="1*"/>
-                <RowDefinition  Height="1*"/>
-                <RowDefinition  Height="1*"/>
-                <RowDefinition  Height="1*"/>
-
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Column="1"  Grid.Row="0" Background="#000000ff"   HorizontalAlignment="Center" VerticalAlignment="Center">
-				<TextBlock Name="Welcome"  FontSize="50" FontWeight="Bold" FontFamily="Roboto" Foreground="#000" Text="Velkommen"/>
-
-			</StackPanel>
-            <StackPanel Grid.Column="1"  Grid.Row="1" Background="#000000ff"   HorizontalAlignment="Center" VerticalAlignment="Center">
-				<TextBlock Name="Message"  FontSize="40" FontFamily="Roboto" FontWeight="Regular"  Foreground="#000" Text="Dette er Team Charlie's Corona app"/>
-			</StackPanel>
-
-        </Grid>
-
+		<Grid x:Name="Home"  Background="#fff" Grid.Column="1" Grid.Row="2">
+			  </Grid>
 
 
         <Grid x:Name="website"  Background="#fff" Grid.Column="1" Grid.Row="2">
