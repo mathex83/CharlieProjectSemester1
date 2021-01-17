@@ -8,6 +8,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="900" Width="1600" WindowStartupLocation="CenterScreen">
 
+    <!--Den generelle grid definition hvor outlines defineres. Janus.-->
     <Grid Background="#fff ">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>
@@ -19,8 +20,8 @@ Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="900" Widt
             <RowDefinition Height="200"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <!--Exit button-->
-
+       
+        <!--Introduktion af vores materialDesign for første gang, hvor vi bruger PackIcon første gang også. Janus.-->
         <Button x:Name="Exit"  Grid.Column="1" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="22" Height="22" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#d43900" HorizontalAlignment="Right"  VerticalAlignment="Center"  Margin="0,0,20,0" Click="Exit_Click" >
             <materialDesign:PackIcon Kind="Power" HorizontalAlignment="Center" VerticalAlignment="Center" Height="22" Width="22" RenderTransformOrigin="27.958,1.543"/>
         </Button>
@@ -30,7 +31,7 @@ Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="900" Widt
         </Button>
 
 
-        <!--Sidebar-->
+        <!--Sidebar der i første omgang blev sat op af Janus, og efterfølgende justeret af Rezan-->
 
         <StackPanel Grid.Row="1" VerticalAlignment="Top" Height="162" Background="#fff">
             <Image Height="162" Source="/Covid19 subsite logo.jpg" Margin="17,0,44,0"/>
@@ -50,7 +51,7 @@ Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="900" Widt
             </Menu>
 
         </StackPanel>
-        <!--Kommune  Name-->
+        <!--Kommune drop down menu for valg af 3 eksempelkommuner, der blev lavet af Janus og Rezan.-->
         <Grid x:Name="kommuneName" Grid.Column="1" Grid.Row="1" Background="#d43900">
 
             <StackPanel Grid.Column="1"  Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -108,6 +109,7 @@ Title="Datamatiker 2020-2023 1. semester-projekt Team Charlie" Height="900" Widt
 				<TextBlock x:Name="tested" Text="DbNumber" Style="{StaticResource FieldEle}"/>
             </StackPanel>
             <!--Info row2 col 1-->
+            <!--Header xaml code, incl colour scheme, Janus.-->
             <Rectangle Margin="72,10,64,10" Fill="White" RadiusY="10" RadiusX="10" Grid.Row="1" >
                 <Rectangle.Effect>
                     <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" RenderingBias="Quality" ShadowDepth="1"/>
