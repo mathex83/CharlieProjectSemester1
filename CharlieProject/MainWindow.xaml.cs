@@ -170,7 +170,7 @@ namespace CharlieProject
                 client.DownloadFileAsync(uri, @"C:\Temp\Corona.zip");
 
             }
-            
+            //hejhej
             Thread.Sleep(500);
 
             ExtractFile();
