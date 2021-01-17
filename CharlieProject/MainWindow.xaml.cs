@@ -24,7 +24,6 @@ using System.Data.SqlClient;
 using System.Configuration;
 using HtmlAgilityPack;
 using HtmlDocument = HtmlAgilityPack.HtmlDocument;
-using CharlieProject.ViewModel;
 using MaterialDesignThemes.Wpf;
 using CharlieProject.Model;
 using CharlieProject.View.Windows;
@@ -50,13 +49,14 @@ namespace CharlieProject
 		public MainWindow()
         {
             InitializeComponent();
+            website.Visibility = Visibility.Hidden;
             info.Visibility = Visibility.Hidden;
             KommuneName.Text = "";
-            Home.Visibility = Visibility.Visible;
 
+            HomePage homepage = new HomePage();
+            Home.Children.Add(homepage);
+            
             client = new WebClient();
-            website.Visibility = Visibility.Hidden;
-            KommuneName.Text = "";
 
         }
 #endregion
@@ -174,6 +174,9 @@ namespace CharlieProject
             Thread.Sleep(500);
 
             ExtractFile();
+            popup p = new popup();
+            p.popupWindow.Text = "Files downloaded!";
+            p.Show();
         }
 
         private void ExtractFile()
@@ -295,9 +298,11 @@ namespace CharlieProject
 		private void Homepage_Click(object sender, RoutedEventArgs e)
         {
             KommuneName.Text = "";
-            Home.Visibility = Visibility.Visible;
             info.Visibility = Visibility.Hidden;
             website.Visibility = Visibility.Hidden;
+            Home.Visibility = Visibility.Visible;
+            HomePage home = new HomePage();
+            Home.Children.Add(home);
         }
 #endregion
 
