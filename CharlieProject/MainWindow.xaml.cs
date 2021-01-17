@@ -247,7 +247,7 @@ namespace CharlieProject
         }
 #endregion
 
-#region buttonclick-events to open browser on our industry groups. Coded by Janus (JBD) and links adapted by Rezan and Martin.
+#region buttonclick-events to open browser on our industry groups. Coded by Janus and links adapted by Rezan and Martin.
         private void Detail_Click(object sender, RoutedEventArgs e)
         {
             var uri = "https://virksomhedsguiden.dk/erhvervsfremme/content/temaer/coronavirus_og_din_virksomhed/ydelser/krav-og-anbefalinger-til-detailhandlen/59cef21f-a199-42a8-bea0-fdc01ed6cf5f/";
