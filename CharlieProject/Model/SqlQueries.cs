@@ -12,7 +12,7 @@ namespace CharlieProject.Model
 	class SqlQueries
 	{
         //Connectionstring to database is fetched from App.config which is ignored by GitHub
-        SqlConnection connString = new SqlConnection(ConfigurationManager.ConnectionStrings["dbConCharlie"].ConnectionString);
+        SqlConnection connString = new SqlConnection(ConfigurationManager.ConnectionStrings["path"].ConnectionString);
 
         public string[][] infectedDataIncoming;
         public string[][] infectedLevelsIncoming;
