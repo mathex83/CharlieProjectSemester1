@@ -1,8 +1,12 @@
 ################### README FOR CORONA PROJEKT - TEAM CHARLIE ###################
 
+#### VIGTIGT!!
+### Programmet sletter alle eksisterende filer i mappen "C:\Temp". 
+### Derefter bliver zip-filen med csv-filer fra SSI hentet og udpakket i denne mappe. 
+### Har du noget data i denne, der skal gemmes, så flyt det inden kørsel af appen!!
+
 
 #### En kort introduktion til nogle af de dependencies vi har implementeret i vores projekt
-
 
 ### NuGet packages som er nødvendige, og som skal downloades og implementeres
 ### i VS for at vores kode kan køre:
